@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using DgmBobinajServer.DTOs.Comment;
+using DgmBobinajServer.DTOs.Contact;
 using DgmBobinajServer.DTOs.DescriptionModelDto;
 using DgmBobinajServer.DTOs.Galery;
+using DgmBobinajServer.DTOs.Information;
 using DgmBobinajServer.DTOs.Layout;
 using DgmBobinajServer.DTOs.Link;
 using DgmBobinajServer.DTOs.MiniService;
+using DgmBobinajServer.DTOs.WorkDate;
 using DgmBobinajServer.Models;
 
 namespace DgmBobinajServer.Mapping;
@@ -30,5 +33,14 @@ public sealed class MappingProfile : Profile
 
         CreateMap<CreateCommentDto, Comment>();
         CreateMap<UpdateCommentDto, Comment>();
+
+        CreateMap<CreateWorkDateDto, WorkDate>();
+        CreateMap<UpdateWorkDateDto, WorkDate>();
+
+        CreateMap<CreateInformationDto, Information>();
+        CreateMap<UpdateInformationDto, Information>();
+
+        CreateMap<CreateContacDto, Contact>();
+        CreateMap<UpdateContactDto, Contact>();
     }
 }

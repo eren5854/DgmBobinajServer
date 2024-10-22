@@ -28,7 +28,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 8;
-    options.SignIn.RequireConfirmedEmail = true;
+    options.SignIn.RequireConfirmedEmail = false;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(1);
     options.Lockout.MaxFailedAccessAttempts = 50;
     options.Lockout.AllowedForNewUsers = true;
@@ -68,6 +68,14 @@ builder.Services.AddScoped<GaleryService>();
 builder.Services.AddScoped<CommentRepository>();
 builder.Services.AddScoped<CommentService>();
 
+builder.Services.AddScoped<WorkDateRepository>();
+builder.Services.AddScoped<WorkDateService>();
+
+builder.Services.AddScoped<InformationRepository>();
+builder.Services.AddScoped<InformationService>();
+
+builder.Services.AddScoped<ContactRepository>();
+builder.Services.AddScoped<ContactService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
