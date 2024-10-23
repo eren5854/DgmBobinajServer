@@ -17,13 +17,13 @@ public sealed class MiniServiceRepository(
 
     public async Task<Result<List<MiniService>>> GetAll(CancellationToken cancellationToken)
     {
-        var miniServices = await context.MiniServices.ToListAsync(cancellationToken);
+        var miniServices = await context.MiniServices.OrderBy(o => o.CreatedDate).ToListAsync(cancellationToken);
         return Result<List<MiniService>>.Succeed(miniServices);
     }
 
     public async Task<Result<List<MiniService>>> GetAllByIsActive(CancellationToken cancellationToken)
     {
-        var miniServices = await context.MiniServices.Where(p => p.IsActive).ToListAsync(cancellationToken);
+        var miniServices = await context.MiniServices.Where(p => p.IsActive).OrderBy(o => o.CreatedDate).ToListAsync(cancellationToken);
         return Result<List<MiniService>>.Succeed(miniServices);
     }
 

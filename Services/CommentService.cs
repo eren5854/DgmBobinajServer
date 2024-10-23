@@ -44,6 +44,7 @@ public sealed class CommentService(
 
         mapper.Map(request, comment);
         comment.IsUpdateable = false;
+        comment.IsActive = true;
         comment.UpdatedDate = DateTime.Now;
         comment.UpdatedBy = request.CommentName;
         return await commentRepository.Update(comment, cancellationToken);

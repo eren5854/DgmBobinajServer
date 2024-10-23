@@ -16,13 +16,13 @@ public sealed class DescriptionModelRepository(ApplicationDbContext context)
 
     public async Task<Result<List<DescriptionModel>>> GetAll(CancellationToken cancellationToken)
     {
-        var descriptionModels = await context.DescriptionModels.ToListAsync(cancellationToken);
+        var descriptionModels = await context.DescriptionModels.OrderBy(o => o.CreatedDate).ToListAsync(cancellationToken);
         return Result<List<DescriptionModel>>.Succeed(descriptionModels);
     }
 
     public async Task<Result<List<DescriptionModel>>> GetAllByIsActive(CancellationToken cancellationToken)
     {
-        var descriptionModels = await context.DescriptionModels.Where(p => p.IsActive).ToListAsync(cancellationToken);
+        var descriptionModels = await context.DescriptionModels.OrderBy(o => o.CreatedDate).Where(p => p.IsActive).ToListAsync(cancellationToken);
         return Result<List<DescriptionModel>>.Succeed(descriptionModels);
     }
 

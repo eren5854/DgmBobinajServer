@@ -10,7 +10,7 @@ public class GaleriesController(
     GaleryService galeryService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> Create(CreateGaleryDto request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromForm]CreateGaleryDto request, CancellationToken cancellationToken)
     {
         var response = await galeryService.Create(request, cancellationToken);
         return StatusCode(response.StatusCode, response);
@@ -31,7 +31,7 @@ public class GaleriesController(
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update(UpdateGaleryDto request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromForm]UpdateGaleryDto request, CancellationToken cancellationToken)
     {
         var response = await galeryService.Update(request, cancellationToken);
         return StatusCode(response.StatusCode, response);
