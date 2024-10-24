@@ -10,7 +10,7 @@ public static class ExtensionMiddleware
         using (var scoped = app.Services.CreateScope())
         {
             var userManager = scoped.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            if (!userManager.Users.Any(p => p.Email == "info@marqexmarine.com"))
+            if (!userManager.Users.Any(p => p.Email == "info@dgmbobinaj.com"))
             {
                 AppUser user = new()
                 {
