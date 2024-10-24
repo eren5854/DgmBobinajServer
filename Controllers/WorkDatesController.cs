@@ -1,5 +1,6 @@
 ﻿using DgmBobinajServer.DTOs.WorkDate;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace DgmBobinajServer.Controllers;
 public class WorkDatesController(
     WorkDateService workDateService) : ControllerBase
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateWorkDateDto request, CancellationToken cancellationToken)
     {
@@ -23,6 +25,7 @@ public class WorkDatesController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Update(UpdateWorkDateDto request, CancellationToken cancellationToken)
     {
@@ -30,6 +33,7 @@ public class WorkDatesController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

@@ -44,6 +44,20 @@ public sealed class LinkService(
         return await linkRepository.Update(link, cancellationToken);
     }
 
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        Link? link = linkRepository.GetById(Id);
+        if (link is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        link.IsActive = !link.IsActive;
+        link.UpdatedDate = DateTime.Now;
+        link.UpdatedBy = "Admin";
+        return await linkRepository.Update(link, cancellation);
+    }
+
     public async Task<Result<string>> DeleteById(Guid Id, CancellationToken cancellationToken)
     {
         return await linkRepository.DeleteByıd(Id, cancellationToken);

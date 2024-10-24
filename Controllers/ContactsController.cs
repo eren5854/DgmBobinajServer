@@ -1,5 +1,6 @@
 ﻿using DgmBobinajServer.DTOs.Contact;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,19 +17,22 @@ public class ContactsController(ContactService contactService) : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var response = await contactService.GetAll(cancellationToken);
         return StatusCode(response.StatusCode, response);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Update(UpdateContactDto request, CancellationToken cancellationToken)
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet]
+    public async Task<IActionResult> Update(Guid Id, CancellationToken cancellationToken)
     {
-        var response = await contactService.Update(request, cancellationToken);
+        var response = await contactService.Update(Id, cancellationToken);
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

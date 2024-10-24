@@ -69,6 +69,20 @@ public sealed class MiniServiceService(
         return await miniServiceRepository.Update(miniService, cancellationToken);
     }
 
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        MiniService? miniService = miniServiceRepository.GetById(Id);
+        if (miniService is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        miniService.IsActive = !miniService.IsActive;
+        miniService.UpdatedDate = DateTime.Now;
+        miniService.UpdatedBy = "Admin";
+        return await miniServiceRepository.Update(miniService, cancellation);
+    }
+
     public async Task<Result<string>> DeleteById(Guid Id, CancellationToken cancellationToken)
     {
         return await miniServiceRepository.DeleteById(Id, cancellationToken);

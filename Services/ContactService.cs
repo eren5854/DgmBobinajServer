@@ -12,7 +12,7 @@ public sealed class ContactService(
 {
     public async Task<Result<string>> Create(CreateContacDto request, CancellationToken cancellationToken)
     {
-        Contact contact = mapper.Map<Contact>(contactRepository);
+        Contact contact = mapper.Map<Contact>(request);
         contact.CreatedBy = request.Name;
         contact.CreatedDate = DateTime.Now;
         return await contactRepository.Create(contact, cancellationToken);
@@ -23,15 +23,15 @@ public sealed class ContactService(
         return await contactRepository.GetAll(cancellationToken);
     }
 
-    public async Task<Result<string>> Update(UpdateContactDto request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Update(Guid Id, CancellationToken cancellationToken)
     {
-        Contact? contact = contactRepository.GetById(request.Id);
+        Contact? contact = contactRepository.GetById(Id);
         if (contact is null)
         {
             return Result<string>.Failure("Mesaj bulunamadı");
         }
 
-        mapper.Map(request, contact);
+        contact.IsRead = true;
         contact.UpdatedDate = DateTime.Now;
         contact.UpdatedBy = "Admin";
 

@@ -28,7 +28,7 @@ public sealed class GaleryRepository(ApplicationDbContext context)
 
     public Galery? GetById(Guid Id)
     {
-        return context.Galeries.FirstOrDefault();
+        return context.Galeries.Where(p => p.Id == Id).FirstOrDefault();
     }
 
     public async Task<Result<string>> Update(Galery galery, CancellationToken cancellation)
@@ -43,7 +43,7 @@ public sealed class GaleryRepository(ApplicationDbContext context)
         Galery? galery = GetById(Id);
         if (galery is null)
         {
-            return Result<string>.Succeed("Resm bulunamadı");
+            return Result<string>.Succeed("Resim bulunamadı");
         }
 
         galery.IsDeleted = true;

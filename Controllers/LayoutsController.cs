@@ -1,5 +1,6 @@
 ﻿using DgmBobinajServer.DTOs.Layout;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +10,14 @@ namespace DgmBobinajServer.Controllers;
 public class LayoutsController(
     LayoutService layoutService) : ControllerBase
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Create([FromForm]CreateLayoutDto request, CancellationToken cancellationToken)
     {
         var response = await layoutService.Create(request, cancellationToken);
         return StatusCode(response.StatusCode, response);
     }
-
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -30,6 +32,7 @@ public class LayoutsController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Update([FromForm]UpdateLayoutDto request, CancellationToken cancellationToken)
     {
@@ -37,6 +40,15 @@ public class LayoutsController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateIsActive(Guid Id, CancellationToken cancellationToken)
+    {
+        var response = await layoutService.UpdateIsActive(Id, cancellationToken);
+        return StatusCode(response.StatusCode, response);
+    }
+
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

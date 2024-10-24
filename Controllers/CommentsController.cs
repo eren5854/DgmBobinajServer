@@ -1,5 +1,6 @@
 ﻿using DgmBobinajServer.DTOs.Comment;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace DgmBobinajServer.Controllers;
 [ApiController]
 public class CommentsController(CommentService commentService) : ControllerBase
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateCommentDto request, CancellationToken cancellationToken)
     {
@@ -15,6 +17,7 @@ public class CommentsController(CommentService commentService) : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -36,6 +39,15 @@ public class CommentsController(CommentService commentService) : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateIsActive(Guid Id, CancellationToken cancellationToken)
+    {
+        var response = await commentService.UpdateIsActive(Id, cancellationToken);
+        return StatusCode(response.StatusCode, response);
+    }
+
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

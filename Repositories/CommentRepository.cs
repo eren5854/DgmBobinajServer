@@ -16,13 +16,13 @@ public sealed class CommentRepository(ApplicationDbContext context)
 
     public async Task<Result<List<Comment>>> GetAll(CancellationToken cancellation)
     {
-        var comments = await context.Comments.ToListAsync(cancellation);
+        var comments = await context.Comments.OrderByDescending(o => o.CreatedDate).ToListAsync(cancellation);
         return Result<List<Comment>>.Succeed(comments);
     }
 
     public async Task<Result<List<Comment>>> GetAllByIsActive(CancellationToken cancellation)
     {
-        var comments = await context.Comments.Where(p => p.IsActive).ToListAsync(cancellation);
+        var comments = await context.Comments.Where(p => p.IsActive).OrderByDescending(o => o.CreatedDate).ToListAsync(cancellation);
         return Result<List<Comment>>.Succeed(comments);
     }
 

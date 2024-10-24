@@ -1,6 +1,7 @@
 ﻿using Azure;
 using DgmBobinajServer.DTOs.MiniService;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace DgmBobinajServer.Controllers;
 public class MiniServicesController(
     MiniServiceService miniServiceService) : ControllerBase
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Create([FromForm]CreateMiniServiceDto request, CancellationToken cancellationToken)
     {
@@ -17,6 +19,7 @@ public class MiniServicesController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -31,6 +34,7 @@ public class MiniServicesController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Update([FromForm]UpdateMiniServiceDto request, CancellationToken cancellationToken)
     {
@@ -38,6 +42,15 @@ public class MiniServicesController(
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateIsActive(Guid Id, CancellationToken cancellationToken)
+    {
+        var response = await miniServiceService.UpdateIsActive(Id, cancellationToken);
+        return StatusCode(response.StatusCode, response);
+    }
+
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

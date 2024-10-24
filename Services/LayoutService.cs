@@ -74,4 +74,18 @@ public sealed class LayoutService(
 
         return await layoutRepository.Update(layout, cancellationToken);
     }
+
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        Layout? layout = layoutRepository.GetById(Id);
+        if (layout is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        layout.IsActive = !layout.IsActive;
+        layout.UpdatedDate = DateTime.Now;
+        layout.UpdatedBy = "Admin";
+        return await layoutRepository.Update(layout, cancellation);
+    }
 }

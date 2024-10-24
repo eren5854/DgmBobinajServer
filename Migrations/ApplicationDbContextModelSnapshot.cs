@@ -55,7 +55,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abouts");
+                    b.ToTable("Abouts", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.AppUser", b =>
@@ -136,7 +136,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Comment", b =>
@@ -182,7 +182,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Contact", b =>
@@ -239,7 +239,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.DescriptionModel", b =>
@@ -284,7 +284,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DescriptionModels");
+                    b.ToTable("DescriptionModels", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Galery", b =>
@@ -319,7 +319,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Galeries");
+                    b.ToTable("Galeries", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Information", b =>
@@ -373,7 +373,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Informations");
+                    b.ToTable("Informations", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Layout", b =>
@@ -416,7 +416,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Layouts");
+                    b.ToTable("Layouts", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Link", b =>
@@ -453,7 +453,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Links");
+                    b.ToTable("Links", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.MiniService", b =>
@@ -496,7 +496,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MiniServices");
+                    b.ToTable("MiniServices", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Process", b =>
@@ -536,7 +536,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Processs");
+                    b.ToTable("Processs", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.Service", b =>
@@ -576,7 +576,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("DgmBobinajServer.Models.WorkDate", b =>
@@ -614,7 +614,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WorkDates");
+                    b.ToTable("WorkDates", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -634,7 +634,7 @@ namespace DgmBobinajServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 #pragma warning restore 612, 618
         }

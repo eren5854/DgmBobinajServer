@@ -1,5 +1,6 @@
 ﻿using DgmBobinajServer.DTOs.Information;
 using DgmBobinajServer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace DgmBobinajServer.Controllers;
 [ApiController]
 public class InformationsController(InformationService informationService) : ControllerBase
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateInformationDto request, CancellationToken cancellationToken)
     {
@@ -15,6 +17,7 @@ public class InformationsController(InformationService informationService) : Con
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -29,6 +32,7 @@ public class InformationsController(InformationService informationService) : Con
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost]
     public async Task<IActionResult> Update(UpdateInformationDto request, CancellationToken cancellationToken)
     {
@@ -36,6 +40,15 @@ public class InformationsController(InformationService informationService) : Con
         return StatusCode(response.StatusCode, response);
     }
 
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateIsActive(Guid Id, CancellationToken cancellationToken)
+    {
+        var response = await informationService.UpdateIsActive(Id, cancellationToken);
+        return StatusCode(response.StatusCode, response);
+    }
+
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
     public async Task<IActionResult> DeleteById(Guid Id, CancellationToken cancellationToken)
     {

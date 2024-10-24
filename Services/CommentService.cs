@@ -43,11 +43,25 @@ public sealed class CommentService(
         }
 
         mapper.Map(request, comment);
-        comment.IsUpdateable = false;
-        comment.IsActive = true;
+        comment.IsActive = false;
         comment.UpdatedDate = DateTime.Now;
         comment.UpdatedBy = request.CommentName;
         return await commentRepository.Update(comment, cancellationToken);
+    }
+
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        Comment? comment = commentRepository.GetById(Id);
+        if (comment is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        comment.IsActive = !comment.IsActive;
+        comment.IsUpdateable = !comment.IsUpdateable;
+        comment.UpdatedDate = DateTime.Now;
+        comment.UpdatedBy = "Admin";
+        return await commentRepository.Update(comment, cancellation);
     }
 
     public async Task<Result<string>> DeleteById(Guid Id, CancellationToken cancellationToken)

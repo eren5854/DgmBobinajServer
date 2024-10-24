@@ -42,6 +42,20 @@ public sealed class InformationService(
         return await informationRepository.Update(information, cancellationToken);
     }
 
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        Information? information = informationRepository.GetById(Id);
+        if (information is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        information.IsActive = !information.IsActive;
+        information.UpdatedDate = DateTime.Now;
+        information.UpdatedBy = "Admin";
+        return await informationRepository.Update(information, cancellation);
+    }
+
     public async Task<Result<string>> DeleteById(Guid Id, CancellationToken cancellationToken)
     {
         return await informationRepository.DeleteById(Id, cancellationToken);

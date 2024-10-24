@@ -70,6 +70,20 @@ public sealed class DescriptionModelService(
         return await descriptionModelRepository.Update(descriptionModel, cancellationToken);
     }
 
+    public async Task<Result<string>> UpdateIsActive(Guid Id, CancellationToken cancellation)
+    {
+        DescriptionModel? descriptionModel = descriptionModelRepository.GetById(Id);
+        if (descriptionModel is null)
+        {
+            return Result<string>.Failure("Kayıt bulunamadı");
+        }
+
+        descriptionModel.IsActive = !descriptionModel.IsActive;
+        descriptionModel.UpdatedDate = DateTime.Now;
+        descriptionModel.UpdatedBy = "Admin";
+        return await descriptionModelRepository.Update(descriptionModel, cancellation);
+    }
+
     public async Task<Result<string>> DeleteById(Guid Id, CancellationToken cancellationToken)
     {
         return await descriptionModelRepository.DeleteById(Id, cancellationToken);
